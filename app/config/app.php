@@ -124,6 +124,7 @@ return array(
 
 		'LaraTodo\LaraTodo\ServiceProviders\Application',
 		'LaraTodo\User\ServiceProviders\Application',
+		'LaraTodo\Session\ServiceProviders\Application',
 
 	),
 

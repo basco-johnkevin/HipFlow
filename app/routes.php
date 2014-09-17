@@ -16,3 +16,7 @@ Route::get('/', 'LaraTodo\LaraTodo\Controllers\LaraTodoController@showHomePage')
 
 Route::get('/users/create', ['as' => 'user.getCreate', 'uses' => 'LaraTodo\User\Controllers\UserController@getCreate']);
 Route::post('/users/create', ['as' => 'user.postCreate', 'uses' => 'LaraTodo\User\Controllers\UserController@postCreate']);
+
+Route::get('/sessions/create', ['as' => 'session.getCreate', 'uses' => 'LaraTodo\Session\Controllers\SessionController@getCreate']);
+Route::post('/sessions/create', ['as' => 'session.postCreate', 'uses' => 'LaraTodo\Session\Controllers\SessionController@postCreate']);
+
