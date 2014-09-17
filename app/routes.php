@@ -20,6 +20,6 @@ Route::post('/users/create', ['as' => 'user.postCreate', 'uses' => 'LaraTodo\Use
 Route::get('/sessions/create', ['as' => 'session.getCreate', 'uses' => 'LaraTodo\Session\Controllers\SessionController@getCreate']);
 Route::post('/sessions/create', ['as' => 'session.postCreate', 'uses' => 'LaraTodo\Session\Controllers\SessionController@postCreate']);
 
-
+Route::get('/todos', ['as' => 'todo.getList', 'uses' => 'LaraTodo\Todo\Controllers\TodoController@getList']);
 Route::get('/todos/create', ['as' => 'todo.getCreate', 'uses' => 'LaraTodo\Todo\Controllers\TodoController@getCreate']);
 Route::post('/todos/create', ['as' => 'todo.postCreate', 'uses' => 'LaraTodo\Todo\Controllers\TodoController@postCreate']);

@@ -10,6 +10,12 @@ use LaraTodo\Todo\Forms\TodoForm;
 
 class TodoController extends BaseController {
 
+    public function getList()
+    {
+        return View::make('Todo::todo.list')
+            ->with('todos', Todo::all());
+    }
+
     public function getCreate()
     {
         return View::make('Todo::todo.create');
