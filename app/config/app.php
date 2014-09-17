@@ -123,6 +123,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
 		'LaraTodo\LaraTodo\ServiceProviders\Application',
+		'LaraTodo\User\ServiceProviders\Application',
 
 	),
 

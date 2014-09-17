@@ -13,3 +13,6 @@
 
 
 Route::get('/', 'LaraTodo\LaraTodo\Controllers\LaraTodoController@showHomePage');
+
+Route::get('/users/create', ['as' => 'user.getCreate', 'uses' => 'LaraTodo\User\Controllers\UserController@getCreate']);
+Route::post('/users/create', ['as' => 'user.postCreate', 'uses' => 'LaraTodo\User\Controllers\UserController@postCreate']);
