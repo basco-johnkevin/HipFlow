@@ -23,6 +23,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
+    public function todos()
+    {
+    	return $this->hasMany('Todo');
+    }
+
 	public function setPasswordAttribute($value)
 	{
 		$this->attributes['password'] = Hash::make($value);
