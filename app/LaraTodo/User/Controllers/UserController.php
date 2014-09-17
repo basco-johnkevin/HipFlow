@@ -17,8 +17,14 @@ class UserController extends BaseController {
     public function postCreate()
     {
         $userForm = new UserForm;
-        $userForm->create(Input::all());
-        return Redirect::to('users/create');
+
+        if ($userForm->create(Input::all())) {
+            return Redirect::route('user.getCreate');
+        }
+
+        return Redirect::route('user.getCreate')
+            ->withInput()
+            ->withErrors($userForm->errors());
     }
 
 }
