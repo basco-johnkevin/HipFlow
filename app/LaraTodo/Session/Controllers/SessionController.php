@@ -5,6 +5,7 @@ use View;
 use Input;
 use Redirect;
 use Auth;
+use LaraTodo\Session\Forms\SessionForm;
 
 class SessionController extends BaseController {
 
@@ -20,7 +21,9 @@ class SessionController extends BaseController {
             'password' => Input::get('password')
         );
 
-        if (Auth::attempt($params)) {
+        $form = new SessionForm;
+
+        if ($form->create($params)) {
             return 'Successfully logged-in';
         }
 
