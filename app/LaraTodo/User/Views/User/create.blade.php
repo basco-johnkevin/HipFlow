@@ -1,21 +1,18 @@
-Create user page
+@extends('layouts.master')
 
-<!-- @TODO: extract this to a macro or a template partial -->
-@if( $errors->has() )
-    <p>We encountered the following errors:</p>
-    <ul>
-        @foreach($errors->all() as $message)
-            <li>{{ $message }}</li>
-        @endforeach
-    </ul>
-@endif
+@section('content')
 
-<!-- @TODO: use raw html to make templates more designer friendly -->
-{{ Form::open(array('route' => 'user.postCreate')) }}
-    {{ Form::text('username') }}
-    {{ Form::email('email') }}
-    {{ Form::password('password') }}
-    {{ Form::password('password_confirmation') }}
-    {{ Form::submit('Sign up') }}
-{{ Form::close() }}
+    <h3>Sign Up</h3>
 
+    @include('partials/form-errors')
+
+    <form method="POST" action="{{ route('user.postCreate') }}" accept-charset="UTF-8">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input name="username" type="text">
+        <input name="email" type="email">
+        <input name="password" type="password" value="">
+        <input name="password_confirmation" type="password">
+        <input type="submit" value="Sign up">
+    </form>
+
+@stop
