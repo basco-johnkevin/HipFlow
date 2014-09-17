@@ -9,7 +9,7 @@ class UserTodoController extends BaseController {
 
     public function getList($username)
     {
-        $todos = User::whereUsername($username)->first()->todos;
+        $todos = User::getTodoListByUsername($username);
         return View::make('User::todo.list')
             ->with('todos', $todos);
     }

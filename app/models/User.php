@@ -33,4 +33,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		$this->attributes['password'] = Hash::make($value);
 	}
 
+	public static function getTodoListByUsername($username)
+	{
+		return static::whereUsername($username)->first()->todos;
+	}
+
 }
