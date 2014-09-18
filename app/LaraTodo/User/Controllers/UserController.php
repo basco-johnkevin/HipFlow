@@ -1,30 +1,44 @@
 <?php namespace LaraTodo\User\Controllers;
 
+use Illuminate\View\Factory as ViewFactory;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+
 use BaseController;
-use View;
-use Input;
-use User;
-use Redirect;
 use LaraTodo\User\Forms\UserForm;
 
 class UserController extends BaseController {
 
+    protected $view;
+    protected $input;
+    protected $redirect;
+    protected $form;
+
+    public function __construct(ViewFactory $view,
+                                Request $input,
+                                Redirector $redirect,
+                                UserForm $form)
+    {
+        $this->view = $view;
+        $this->input = $input;
+        $this->redirect = $redirect;
+        $this->form = $form;
+    }
+
     public function getCreate()
     {
-        return View::make('User::user.create');
+        return $this->view->make('User::user.create');
     }
 
     public function postCreate()
     {
-        $userForm = new UserForm;
-
-        if ($userForm->create(Input::all())) {
-            return Redirect::route('user.getCreate');
+        if ($this->form->create($this->input->all())) {
+            return $this->redirect->route('user.getCreate');
         }
 
-        return Redirect::route('user.getCreate')
+        return $this->redirect->route('user.getCreate')
             ->withInput()
-            ->withErrors($userForm->errors());
+            ->withErrors($this->form->errors());
     }
 
 }

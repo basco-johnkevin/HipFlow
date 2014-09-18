@@ -1,37 +1,54 @@
 <?php namespace LaraTodo\Todo\Controllers;
 
-use BaseController;
-use View;
-use Input;
-use Todo;
-use Auth;
-use Redirect;
-use LaraTodo\Todo\Forms\TodoForm;
+use Illuminate\View\Factory as ViewFactory;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
-class TodoController extends BaseController {
+use BaseController;
+use LaraTodo\Todo\Forms\TodoForm;
+use Todo;
+
+class TodoController extends BaseController
+{
+    protected $view;
+    protected $input;
+    protected $redirect;
+    protected $form;
+    protected $todo;
+
+    public function __construct(ViewFactory $view,
+                                Request $input,
+                                Redirector $redirect,
+                                TodoForm $form,
+                                Todo $todo)
+    {
+        $this->view = $view;
+        $this->input = $input;
+        $this->redirect = $redirect;
+        $this->form = $form;
+        $this->todo = $todo;
+    }
 
     public function getList()
     {
-        return View::make('Todo::todo.list')
-            ->with('todos', Todo::all());
+        return $this->view->make('Todo::todo.list')
+            ->with('todos', $this->todo->all());
     }
 
     public function getCreate()
     {
-        return View::make('Todo::todo.create');
+        return $this->view->make('Todo::todo.create');
     }
 
     public function postCreate()
     {
-        $form = new TodoForm;
-
-        if ($form->create(Input::all())) {
-            return Todo::all();
+        if ($this->form->create($this->input->all())) {
+            return $this->todo->all();
         }
 
-        return Redirect::route('todo.getCreate')
+        return $this->redirect->route('todo.getCreate')
             ->withInput()
-            ->withErrors($form->errors());
+            ->withErrors($this->form->errors());
     }
 
 }

@@ -1,11 +1,18 @@
 <?php namespace LaraTodo\Session\Forms;
 
-use Auth;
+use Illuminate\Auth\AuthManager;
 
 class SessionForm
 {
+    protected $auth;
+
+    public function __construct(AuthManager $auth)
+    {
+        $this->auth = $auth;
+    }
+
     public function create(array $inputs)
     {
-        return Auth::attempt($inputs);
+        return $this->auth->attempt($inputs);
     }
 }

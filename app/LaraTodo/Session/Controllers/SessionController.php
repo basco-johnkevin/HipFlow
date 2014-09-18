@@ -5,10 +5,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 use BaseController;
-use View;
-use Input;
-use Redirect;
-use Auth;
 use LaraTodo\Session\Forms\SessionForm;
 
 class SessionController extends BaseController {

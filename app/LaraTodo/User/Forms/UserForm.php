@@ -1,7 +1,8 @@
 <?php namespace LaraTodo\User\Forms;
 
+use Illuminate\Validation\Factory as ValidatorFactory;
+
 use User;
-use Validator;
 
 class UserForm
 {
@@ -12,25 +13,31 @@ class UserForm
         'email' => 'required|email|unique:users'
     ];
 
-    protected $validator;
+    protected $validatorFactory;
+    protected $user;
 
-    // @TODO: add validation
+    public function __construct(ValidatorFactory $validatorFactory,
+                                User $user)
+    {
+        $this->validatorFactory = $validatorFactory;
+        $this->user = $user;
+    }
+
     public function create(array $input)
     {
         if ( ! $this->validate($input)) {
             return false;
         }
 
-        $user = new User;
-        $user->username = $input['username'];
-        $user->email = $input['email'];
-        $user->password = $input['password'];
-        return $user->save();
+        $this->user->username = $input['username'];
+        $this->user->email = $input['email'];
+        $this->user->password = $input['password'];
+        return $this->user->save();
     }
 
     public function validate($data)
     {
-        $this->validator = Validator::make($data, $this->rules);
+        $this->validator = $this->validatorFactory->make($data, $this->rules);
         return $this->validator->passes();
     }
 

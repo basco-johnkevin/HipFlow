@@ -1,8 +1,9 @@
 <?php namespace LaraTodo\Todo\Forms;
 
+use Illuminate\Validation\Factory as ValidatorFactory;
+use Illuminate\Auth\AuthManager;
+
 use Todo;
-use Validator;
-use Auth;
 
 class TodoForm
 {
@@ -10,7 +11,19 @@ class TodoForm
         'title' => 'required'
     ];
 
-    protected $validator;
+    protected $validatorFactory;
+    protected $auth;
+    protected $todo;
+
+    public function __construct(ValidatorFactory $validatorFactory,
+                                AuthManager $auth,
+                                Todo $todo)
+    {
+        $this->validatorFactory = $validatorFactory;
+
+        $this->auth = $auth;
+        $this->todo = $todo;
+    }
 
     public function create(array $input)
     {
@@ -18,16 +31,15 @@ class TodoForm
             return false;
         }
 
-        $todo = new Todo;
-        $todo->title = $input['title'];
-        $todo->description = $input['description'];
-        $todo->user_id = Auth::user()->id;
-        return $todo->save();
+        $this->todo->title = $input['title'];
+        $this->todo->description = $input['description'];
+        $this->todo->user_id = $this->auth->user()->id;
+        return $this->todo->save();
     }
 
     public function validate($data)
     {
-        $this->validator = Validator::make($data, $this->rules);
+        $this->validator = $this->validatorFactory->make($data, $this->rules);
         return $this->validator->passes();
     }
 
