@@ -1,3 +1,4 @@
 Home Page
 
-<a href="{{ route('user.getCreate') }}">Sign Up</a>
+<a href="{{ route('users.create') }}">Sign Up</a>
+<a href="{{ route('sessions.create') }}">Sign In</a>
