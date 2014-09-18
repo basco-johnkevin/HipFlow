@@ -8,8 +8,8 @@ use BaseController;
 use LaraTodo\Todo\Forms\TodoForm;
 use Todo;
 
-class TodoController extends BaseController
-{
+class TodoController extends BaseController {
+
     protected $view;
     protected $input;
     protected $redirect;
@@ -29,26 +29,44 @@ class TodoController extends BaseController
         $this->todo = $todo;
     }
 
-    public function getList()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
     {
         return $this->view->make('Todo::todo.list')
             ->with('todos', $this->todo->all());
     }
 
-    public function getCreate()
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
     {
         return $this->view->make('Todo::todo.create');
     }
 
-    public function postCreate()
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
     {
         if ($this->form->create($this->input->all())) {
             return $this->todo->all();
         }
 
-        return $this->redirect->route('todo.getCreate')
+        return $this->redirect->route('todos.create')
             ->withInput()
             ->withErrors($this->form->errors());
     }
+
 
 }

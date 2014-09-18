@@ -6,7 +6,7 @@
 
     @include('partials/form-errors')
 
-    <form method="POST" action="{{ route('todo.postCreate') }}" accept-charset="UTF-8">
+    <form method="POST" action="{{ route('todos.store') }}" accept-charset="UTF-8">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input name="title" type="text">
         <textarea name="description"></textarea>
