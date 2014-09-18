@@ -12,6 +12,8 @@
 */
 
 
+Route::when('*', 'csrf', array('post'));
+
 Route::get('/', 'LaraTodo\LaraTodo\Controllers\LaraTodoController@showHomePage');
 
 Route::resource('users', 'LaraTodo\User\Controllers\UserController');
