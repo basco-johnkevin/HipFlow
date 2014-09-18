@@ -29,8 +29,9 @@ class UserTodoController extends BaseController {
     public function index($username)
     {
         $todos = $this->user->getTodoListByUsername($username);
+        $usernameOfTodoListOwner = $username;
         return $this->view->make('User::todo.list')
-            ->with('todos', $todos);
+            ->with(compact('todos', 'usernameOfTodoListOwner'));
     }
 
 

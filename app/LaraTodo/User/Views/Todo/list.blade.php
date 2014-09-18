@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h3>Todos created by: {{ Auth::user()->username }}</h3>
+    <h3>Todos created by: {{ $usernameOfTodoListOwner }}</h3>
 
     @include('partials/form-errors')
 
