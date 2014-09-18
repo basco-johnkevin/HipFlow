@@ -27,6 +27,8 @@ class TodoController extends BaseController {
         $this->redirect = $redirect;
         $this->form = $form;
         $this->todo = $todo;
+
+        $this->beforeFilter('auth', array('only' => array('create', 'store')));
     }
 
     /**
