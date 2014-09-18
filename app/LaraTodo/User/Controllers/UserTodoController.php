@@ -21,11 +21,17 @@ class UserTodoController extends BaseController {
         $this->user = $user;
     }
 
-    public function getList($username)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index($username)
     {
         $todos = $this->user->getTodoListByUsername($username);
         return $this->view->make('User::todo.list')
             ->with('todos', $todos);
     }
+
 
 }
