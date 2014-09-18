@@ -6,7 +6,7 @@
 
     @include('partials/form-errors')
 
-    <form method="POST" action="{{ route('user.postCreate') }}" accept-charset="UTF-8">
+    <form method="POST" action="{{ route('users.store') }}" accept-charset="UTF-8">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input name="username" type="text">
         <input name="email" type="email">

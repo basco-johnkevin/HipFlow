@@ -7,7 +7,7 @@ use Illuminate\Routing\Redirector;
 use BaseController;
 use LaraTodo\User\Forms\UserForm;
 
-class UserController extends BaseController {
+class UserController extends \BaseController {
 
     protected $view;
     protected $input;
@@ -25,18 +25,30 @@ class UserController extends BaseController {
         $this->form = $form;
     }
 
-    public function getCreate()
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
     {
         return $this->view->make('User::user.create');
     }
 
-    public function postCreate()
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
     {
         if ($this->form->create($this->input->all())) {
-            return $this->redirect->route('user.getCreate');
+            return $this->redirect->route('users.create');
         }
 
-        return $this->redirect->route('user.getCreate')
+        return $this->redirect->route('users.create')
             ->withInput()
             ->withErrors($this->form->errors());
     }
