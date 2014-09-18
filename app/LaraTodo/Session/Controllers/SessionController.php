@@ -50,7 +50,7 @@ class SessionController extends BaseController {
         );
 
         if ($this->form->create($params)) {
-            return 'Successfully logged-in';
+            return $this->redirect->route('todos.create');
         }
 
         return $this->redirect->route('sessions.create')

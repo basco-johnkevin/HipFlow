@@ -45,7 +45,7 @@ class UserController extends \BaseController {
     public function store()
     {
         if ($this->form->create($this->input->all())) {
-            return $this->redirect->route('users.create');
+            return $this->redirect->route('sessions.create');
         }
 
         return $this->redirect->route('users.create')

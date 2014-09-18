@@ -60,7 +60,7 @@ class TodoController extends BaseController {
     public function store()
     {
         if ($this->form->create($this->input->all())) {
-            return $this->todo->all();
+            return $this->redirect->route('todos.index');
         }
 
         return $this->redirect->route('todos.create')
