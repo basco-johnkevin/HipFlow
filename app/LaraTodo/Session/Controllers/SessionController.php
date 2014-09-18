@@ -25,12 +25,24 @@ class SessionController extends BaseController {
         $this->form = $form;
     }
 
-    public function getCreate()
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
     {
         return $this->view->make('Session::session.create');
     }
 
-    public function postCreate()
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
     {
         $params = array(
             'username' => $this->input->get('username'),
@@ -41,7 +53,7 @@ class SessionController extends BaseController {
             return 'Successfully logged-in';
         }
 
-        return $this->redirect->route('session.getCreate')
+        return $this->redirect->route('sessions.create')
             ->with('message', 'Wrong username or password');
     }
 

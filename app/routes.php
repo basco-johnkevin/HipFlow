@@ -18,8 +18,7 @@ Route::get('/users/create', ['as' => 'user.getCreate', 'uses' => 'LaraTodo\User\
 Route::post('/users/create', ['as' => 'user.postCreate', 'uses' => 'LaraTodo\User\Controllers\UserController@postCreate']);
 Route::get('/users/{username}/todos', ['as' => 'user.getList', 'uses' => 'LaraTodo\User\Controllers\UserTodoController@getList']);
 
-Route::get('/sessions/create', ['as' => 'session.getCreate', 'uses' => 'LaraTodo\Session\Controllers\SessionController@getCreate']);
-Route::post('/sessions/create', ['as' => 'session.postCreate', 'uses' => 'LaraTodo\Session\Controllers\SessionController@postCreate']);
+Route::resource('sessions', 'LaraTodo\Session\Controllers\SessionController');
 
 Route::get('/todos', ['as' => 'todo.getList', 'uses' => 'LaraTodo\Todo\Controllers\TodoController@getList']);
 Route::get('/todos/create', ['as' => 'todo.getCreate', 'uses' => 'LaraTodo\Todo\Controllers\TodoController@getCreate']);
