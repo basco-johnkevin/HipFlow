@@ -1,4 +1,4 @@
-<?php namespace Tests\Functional;
+<?php namespace Tests\Unit\LaraTodo\User\Controllers;
 
 use TestCase;
 use User;
