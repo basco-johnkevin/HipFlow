@@ -16,16 +16,11 @@ class SessionFormTest extends TestCase
 
     public function testCreateShouldReturnTrueWhenPassedWithValidCredentials()
     {
-        $rawPassword = 'dummypassword';
-        $user = new User;
-        $user->username = 'johndoe25';
-        $user->password = $rawPassword;
-        $user->email = 'johndoe25@gmail.com';
-        $user->save();
+        $this->createUser();
 
         $inputs = [
-            'username' => $user->username,
-            'password' => $rawPassword
+            'username' => $this->user->username,
+            'password' => $this->rawPassword
         ];
 
         $form = new SessionForm($this->app->make('auth'));

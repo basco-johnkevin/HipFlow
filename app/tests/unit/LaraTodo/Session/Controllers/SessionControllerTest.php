@@ -21,16 +21,11 @@ class SessionControllerTest extends TestCase
 
     public function testStoreShouldRedirectToCreateTodoPageOnSuccessfulLogin()
     {
-        $rawPassword = 'dummypassword';
-        $user = new User;
-        $user->username = 'johndoe25';
-        $user->password = $rawPassword;
-        $user->email = 'johndoe25@gmail.com';
-        $user->save();
+        $this->createUser();
 
         $inputs = [
-            'username' => $user->username,
-            'password' => $rawPassword
+            'username' => $this->user->username,
+            'password' => $this->rawPassword
         ];
 
         $response = $this->call('POST', route('sessions.store', $inputs));

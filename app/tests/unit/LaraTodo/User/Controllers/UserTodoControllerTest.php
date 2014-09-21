@@ -12,13 +12,7 @@ class UserTodoControllerTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-
-        $user = new User;
-        $user->username = 'johndoe25';
-        $user->password = 'dummypassword';
-        $user->email = 'johndoe25@gmail.com';
-        $user->save();
-        $this->user = $user;
+        $this->createUser();
     }
 
     public function testIndexShouldRespondWithOk()

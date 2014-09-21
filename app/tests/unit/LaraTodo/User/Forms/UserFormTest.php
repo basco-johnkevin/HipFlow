@@ -94,18 +94,13 @@ class UserFormTest extends TestCase
 
     public function testCreateShouldReturnFalseWhenEmailIsAlreadyUsed()
     {
-        $rawPassword = 'dummypassword';
-        $user = new User;
-        $user->username = 'johndoe25';
-        $user->password = $rawPassword;
-        $user->email = 'johndoe25@gmail.com';
-        $user->save();
+        $this->createUser();
 
         $inputs = [
             'username' => 'ken25',
             'password' => 'dummypassword',
             'password_confirmation' => 'dummypassword',
-            'email' => $user->email
+            'email' => $this->user->email
         ];
 
         $form = new UserForm($this->app->make('validator'), new User);
@@ -114,15 +109,10 @@ class UserFormTest extends TestCase
 
     public function testCreateShouldReturnFalseWhenUsernameIsAlreadyUsed()
     {
-        $rawPassword = 'dummypassword';
-        $user = new User;
-        $user->username = 'johndoe25';
-        $user->password = $rawPassword;
-        $user->email = 'johndoe25@gmail.com';
-        $user->save();
+        $this->createUser();
 
         $inputs = [
-            'username' => $user->username,
+            'username' => $this->user->username,
             'password' => 'dummypassword',
             'password_confirmation' => 'dummypassword',
             'email' => 'ken@gmail.com'

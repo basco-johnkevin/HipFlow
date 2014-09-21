@@ -2,6 +2,9 @@
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase {
 
+    protected $user;
+    protected $rawPassword = 'dummypassword';
+
     public function setUp()
     {
         parent::setUp();
@@ -26,5 +29,15 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 
 		return require __DIR__.'/../../bootstrap/start.php';
 	}
+
+    protected function createUser()
+    {
+        $user = new User;
+        $user->username = 'johndoe25';
+        $user->password = $this->rawPassword;
+        $user->email = 'johndoe25@gmail.com';
+        $user->save();
+        $this->user = $user;
+    }
 
 }
