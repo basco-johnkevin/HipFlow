@@ -14,12 +14,12 @@ class UserControllerTest extends TestCase
 
     public function testStoreShouldBeAbleToSuccessfullyCreateAUser()
     {
-        $inputs = array(
+        $inputs = [
             'username' => 'johndoe25',
             'password' => 'dummypassword',
             'password_confirmation' => 'dummypassword',
             'email' => 'johndoe25@gmail.com'
-        );
+        ];
 
         $response = $this->call('POST', route('users.store', $inputs));
         $this->assertRedirectedToRoute('sessions.create');
